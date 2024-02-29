@@ -20,11 +20,11 @@
     font-family: Googlesand Regular ;
 
 }
-.menu-item.menu-item-focus{
+/* .menu-item.menu-item-focus{
     background-color: #019160;
     color: #fff;
     font-family: Googlesand Mediums ;
-}
+} */
 .menu-item .menu-icon{
     flex-shrink: 0;
     margin-left: 16px;
@@ -36,4 +36,12 @@
 }
 .menu-item .menu-text{
     font-size: 13px;
+}
+.router-link-active{
+    background-color: #019160;
+    color: #fff;
+    font-family: Googlesand Mediums ;
+}
+.router-link-active .menu-text{
+    color: #fff;
 }

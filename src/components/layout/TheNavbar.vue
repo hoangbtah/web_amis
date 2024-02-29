@@ -1,20 +1,20 @@
 <template lang="">
      <div class="navbar">
-            <div class="menu-item menu-item-focus">
+            <router-link to="/employee" class="menu-item menu-item-focus" >
                 <div class="menu-icon m-icon-overview">   
                 </div>
                 <div class="menu-text">
                     Tổng quan
                 </div>
-            </div>
-            <div class="menu-item">
+           </router-link>
+            <router-link class="menu-item" to="/report">
                 <div class="menu-icon m-icon-cash">
                     
                 </div>
                 <div class="menu-text">
                     Tiền mặt
                 </div>
-            </div>
+            </router-link>
             <div class="menu-item">
                 <div class="menu-icon m-icon-deposits">
                     
@@ -127,6 +127,10 @@ export default {
     
 }
 </script>
-<style scoped>
+<style>
 @import url("../../style/layout/navbar.css");
+.navbar a{
+    text-decoration: none;
+    color: unset;
+}
 </style>

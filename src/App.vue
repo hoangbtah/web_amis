@@ -24,6 +24,6 @@ export default {
 
 <style>
 @import url("./style/main.css");
-@import url("./style/page/employ.css");
+/* @import url("./style/page/employ.css"); */
 
 </style>
