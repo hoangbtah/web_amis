@@ -3,7 +3,7 @@
             <div class="m-page-header">
                 <div class="m-page-title">Nhân viên</div>
                 <div class="m-page-button">
-                    <button id="btn-add" class="m-btn ">Thêm mới nhân viên</button>
+                    <button id="btn-add" class="m-btn " @click="btnAddClick">Thêm mới nhân viên</button>
                 </div>
             </div>
             <div class="m-page-toolbar">
@@ -34,12 +34,13 @@
                              </tr>       
                             </thead>     
                             <tbody>
-                                    <tr v-for="employee in employees" :key="employee.EmployeeId">
+                                    <tr v-for="employee in employees" :key="employee.employeeId" 
+                                    @dblclick="rowOnDBClick(employee)">
                             <td class="m-content-center" ><input type="checkbox" class="m-table-select"></td>
-                            <td class="m-content-left">{{employee.EmployeeCode}}</td>
-                            <td class="m-content-left">{{employee.EmployeeName }}</td>
-                            <td class="m-content-left">{{ formatGender(employee.Gender) }}</td>
-                            <td class="m-content-center">{{ formatDate(employee.DateOfBrith )}}</td>
+                            <td class="m-content-left">{{employee.employeeCode}}</td>
+                            <td class="m-content-left">{{employee.employeeName }}</td>
+                            <td class="m-content-left">{{ formatGender(employee.gender) }}</td>
+                            <td class="m-content-center">{{ formatDate(employee.dateOfBrith )}}</td>
                             <td class="m-content-left" >{{ employee.IdentityCode }}</td>
                             <td class="m-content-left">{{ employee.Position }}</td>
                             <td>{{employee.DepartmentName }}</td>
@@ -88,12 +89,18 @@
                     </div>   
             </div>
     </div>
+    <EmployeeDetail :isShow="isShowDialog"
+    @isShowDialog="showEmployeeDetail" 
+    :employeeSelected="employeeSelected"
+    :employeeSelectedId="employeeSelectedId"
+    :forMod="forDetailMode"/>
 </template>
 <script>
 import axios from 'axios'
+import EmployeeDetail from'./EmployeeDetail.vue'
 export default {
   name: "EmployeeList",
-  components:{},
+  components:{EmployeeDetail},
   //giai đoạn 1 beforeCreate 
   beforeCreate(){
     console.log("beforeCreate");
@@ -106,7 +113,7 @@ export default {
     // console.log(name);
     try{
         var me=this;
-        axios.get("https://localhost:7159/api/v1/Employees/employees").then((response)=>{
+        axios.get("https://localhost:7159/api/v1/Employees").then((response)=>{
             console.log(response.data);
             me.employees=response.data;
         });
@@ -160,6 +167,28 @@ export default {
         return "Nữ";
         else
         return "Chưa xác định"
+    },
+    btnAddClick(){
+        // document.getElementById("dialogadd").style.display="block";
+        var me=this;
+        me.isShowDialog=true;
+     //   me.employeeSelected={};
+    // console.log("mã nhân viên",this.employeeSelectedId);
+      me.employeeSelectedId=null;
+      me.forDetailMode=1;
+      console.log(me.forDetailMode);
+    },
+    showEmployeeDetail(isShow){
+        this.isShowDialog=isShow;
+    },
+    rowOnDBClick(employee){
+        // console.log("employee");
+        // console.log(employee);
+      //  this.employeeSelected=employee;
+        this.employeeSelectedId=employee.employeeId;
+        this.showEmployeeDetail(true);
+        this.forDetailMode=0;
+        console.log(this.forDetailMode);
     }
             
 
@@ -168,6 +197,9 @@ export default {
     return {
         fullName:"Bui Viet Hoang",
         employees:null,
+        isShowDialog:false,
+        forDetailMode:0,
+        
     };
   },
 

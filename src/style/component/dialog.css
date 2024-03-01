@@ -33,6 +33,9 @@
     font-family: Googlesand Regular ;
     font-size: 15px;
 }
+.isShowDialog{
+    display: block;
+}
 .m-dialog .m-dialog-header button.m-dialog-close{
     position: fixed;
     text-align: center;
